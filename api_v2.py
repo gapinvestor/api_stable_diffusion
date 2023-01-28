@@ -73,6 +73,7 @@ api.add_middleware(
     allow_headers=['*']
 )
 
+
 pipe = StableDiffusionPipeline.from_pretrained("./stable-diffusion-v1-5", revision='fp16', torch_dtype=torch.float16)
 pipe.to("cuda")
 
