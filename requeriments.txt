@@ -1,0 +1,8 @@
+fastapi
+diffusers
+wget
+transformers
+acelerate
+nest_asyncio
+pyngrok
+uvicorn
