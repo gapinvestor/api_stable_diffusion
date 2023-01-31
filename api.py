@@ -1,4 +1,4 @@
-# # Instalación de las librerías necesarias # #
+# # Installation of the necessary libraries # #
 # pip install fastapi     
 # pip install diffusers   
 # pip install wget
@@ -10,7 +10,7 @@
 
 
 
-def descargar_modelo_od():
+def download_od_model():
     '''
     Download stable-diffusion-v1-5 model.
     '''
@@ -72,12 +72,12 @@ api.add_middleware(
     allow_headers=['*']
 )
 
-descargar_modelo_od()
+download_od_model()
 pipe = StableDiffusionPipeline.from_pretrained("./stable-diffusion-v1-5", revision='fp16', torch_dtype=torch.float16)
 pipe.to("cuda")
 
 @api.get("/")
-def generador(prompt: str):
+def generator(prompt: str):
     '''
     Generate an image from the received prompt.
     Receive:
@@ -89,14 +89,14 @@ def generador(prompt: str):
     # Ajustamos el prompt para que no nos salga en negro (parece que finalmente no hace falta)
     # prompt = prompt + ' --precision full --no-half --medvram'
     with autocast("cuda"):
-        imagen = pipe(prompt, guidance_scale=7.5).images[0]
+        image = pipe(prompt, guidance_scale=7.5).images[0]
 
-    nombre_archivo = prompt.replace(' ','_')
-    imagen.save(f'{nombre_archivo}.png')
-    # Devolvemos la imagen codificada en base64
-    # Usar la web https://codebeautify.org/base64-to-image-converter para ver foto
+    file_name = prompt.replace(' ','_')
+    image.save(f'{file_name}.png')
+    # Return the encoded image in base64
+    # Use https://codebeautify.org/base64-to-image-converter to uncode the image
     buffer = BytesIO()
-    imagen.save(buffer, format='PNG')
+    image.save(buffer, format='PNG')
     imgstr = base64.b64encode(buffer.getvalue())
 
     return Response(content=imgstr) # media_type="image/png"

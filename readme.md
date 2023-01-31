@@ -1,4 +1,7 @@
-# Instrucciones
-1. Clonar repositorio
-2. Acceder a la ubicación del repositorio en nuestra terminal
-3. Ejecutar el comando `uvicorn api_v2:api --reload`
+# How to run the API
+1. Clone this repository
+2. Go to the local location of the repository in your terminal
+3. Run the following command `uvicorn api_v2:api --reload`
+
+# How to send prompts to generate images
+1. Access your localhost server
