@@ -47,7 +47,7 @@ def descargar_modelo_od():
         os.system('''sed -i 's@"sample_size": 256,@"sample_size": 512,@g' /content/stable-diffusion-v1-5/vae/config.json''')
         os.chdir("/content/")
         clear_output()
-        print('[1;32mDONE !')
+        print('DONE !')
 
 
 #########################################
